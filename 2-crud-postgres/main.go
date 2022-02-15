@@ -17,6 +17,10 @@ func main() {
 
 		books.GET("/read-all", controllers.FindBooks)
 		books.POST("/create", controllers.CreateBook)
+		books.GET("/read/:id", controllers.FindBook)
+		books.PUT("/update/:id", controllers.UpdateBook)
+		books.DELETE("/delete/:id", controllers.DeleteBook)
+
 	}
 
 	router.Run()
