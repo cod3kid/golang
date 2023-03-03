@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 )
 
-func main(){
+func main2(){
 
 	file, err := os.Open("dummy.txt")
 	if err != nil{
