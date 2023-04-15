@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 	"fmt"
-	"time"
 	"net/http"
 	"github.com/gin-gonic/gin"
 )
