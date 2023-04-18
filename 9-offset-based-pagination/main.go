@@ -8,7 +8,7 @@ import (
 
 func FindBooks(c *gin.Context) {
 	var pokemons []models.Pokemon
-	models.DB.Find(&pokemons)
+	models.DB.Limit(2).Offset(2).Find(&pokemons)
 	c.JSON(http.StatusOK, gin.H{"data": pokemons})
 }
 
