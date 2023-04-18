@@ -1,22 +1,24 @@
 package main
 
 import (
+	"github.com/cod3kid/golang/9-offset-based-pagination/models"
 	"net/http"
-
 	"github.com/gin-gonic/gin"
 )
 
-func getBooks(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, gin.H{"message":"This is getBooks function"})
+func FindBooks(c *gin.Context) {
+	var pokemons []models.Pokemon
+	models.DB.Limit(2).Offset(2).Find(&pokemons)
+	c.JSON(http.StatusOK, gin.H{"data": pokemons})
 }
 
+
 func main() {
-	//router setup
 	router := gin.Default()
 
-	// route group for books
-	router.GET("/get-books", getBooks)
+	models.ConnectDatabase()
+	router.GET("/read-all", FindBooks)
+	
 
-	// Listening to port..  by default it listens to 8080 router.Run()
-	router.Run(":8000")
+	router.Run()
 }
