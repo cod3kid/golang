@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/cod3kid/golang/10-authentication/models"
+	"golang.org/x/crypto/bcrypt"
 	"net/http"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -18,12 +19,20 @@ func SignUp(c *gin.Context) {
 		Password string
 	}
 
-	if c.Bind(&body) == nil{
+	if c.Bind(&body) != nil{
 		c.JSON(http.StatusBadRequest, gin.H{"error": "No request body found"})
+		return
 	}
 
-	fmt.Printf("%+v",body)
-	c.JSON(http.StatusOK, gin.H{"data": "Hello World"})
+	hashedPassword,err := bcrypt.GenerateFromPassword([]byte(body.Password),10)
+	if err != nil{
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Failed to hash the password"})
+		return
+	}
+	fmt.Println(string(hashedPassword))
+
+
+	c.JSON(http.StatusOK, gin.H{"message":"User created"})
 }
 
 
