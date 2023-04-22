@@ -4,7 +4,6 @@ import (
 	"github.com/cod3kid/golang/10-authentication/models"
 	"golang.org/x/crypto/bcrypt"
 	"net/http"
-	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
@@ -29,10 +28,11 @@ func SignUp(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Failed to hash the password"})
 		return
 	}
-	fmt.Println(string(hashedPassword))
 
+	user := models.User{Name: body.Name, Email: body.Email, Password: string(hashedPassword)}
+	models.DB.Create(&user)
 
-	c.JSON(http.StatusOK, gin.H{"message":"User created"})
+	c.JSON(http.StatusOK, gin.H{"data": user, "message":"User created"})
 }
 
 
