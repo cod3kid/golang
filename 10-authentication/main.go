@@ -59,6 +59,17 @@ func Login(c *gin.Context) {
 		return
 	}
 
+	hashedPassword,err := bcrypt.GenerateFromPassword([]byte(body.Password),10)
+	if err != nil{
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Failed to hash the password"})
+		return
+	}
+
+	err = bcrypt.CompareHashAndPassword(hashedPassword, []byte(body.Password)) 
+	if err != nil{
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Passwords doesn't match"})
+		return
+	}
 	fmt.Printf("%+v",user)
 
 }
