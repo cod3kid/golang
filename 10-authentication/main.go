@@ -3,7 +3,6 @@ package main
 import (
 	"github.com/cod3kid/golang/10-authentication/models"
 	"golang.org/x/crypto/bcrypt"
-	"fmt"
 	"net/http"
 	"github.com/gin-gonic/gin"
 )
@@ -70,8 +69,8 @@ func Login(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Passwords doesn't match"})
 		return
 	}
-	fmt.Printf("%+v",user)
 
+	c.JSON(http.StatusOK, gin.H{"data": user.Name, "message":"Login Successful"})
 }
 
 
