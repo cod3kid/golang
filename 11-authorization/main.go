@@ -1,10 +1,13 @@
 package main
 
 import (
-	"github.com/cod3kid/golang/10-authorization/models"
+	"github.com/cod3kid/golang/11-authorization/models"
 	"golang.org/x/crypto/bcrypt"
 	"net/http"
+	"time"
+	"fmt"
 	"github.com/gin-gonic/gin"
+	 "github.com/golang-jwt/jwt/v5"
 )
 
 func HelloWorld(c *gin.Context) {
@@ -70,7 +73,19 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"data": user.Name, "message":"Login Successful"})
+	// Generate Token
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256,jwt.MapClaims{
+		"user": user.Email,
+		"exp": time.Now().Add(time.Hour * 24 * 30).Unix(),
+	})
+
+	tokenString, err := token.SignedString([]byte("FakeSecret"))
+	if err != nil{
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Failed to create token"})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": tokenString, "message":"Login Successful"})
 }
 
 
