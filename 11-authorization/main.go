@@ -2,10 +2,10 @@ package main
 
 import (
 	"github.com/cod3kid/golang/11-authorization/models"
+	"github.com/cod3kid/golang/11-authorization/middlewares"
 	"golang.org/x/crypto/bcrypt"
 	"net/http"
 	"time"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	 "github.com/golang-jwt/jwt/v5"
 )
@@ -88,6 +88,11 @@ func Login(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": tokenString, "message":"Login Successful"})
 }
 
+func GetPosts(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{ "message":"From GetPosts"})
+}
+
+
 
 func main() {
 	router := gin.Default()
@@ -96,6 +101,7 @@ func main() {
 	router.GET("/", HelloWorld)
 	router.POST("/signup", SignUp)
 	router.POST("/login", Login)	
+	router.GET("/posts",middlewares.RequireAuth,GetPosts)
 	
 
 	router.Run()
