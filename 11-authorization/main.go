@@ -6,6 +6,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"net/http"
 	"time"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	 "github.com/golang-jwt/jwt/v5"
 )
@@ -89,6 +90,8 @@ func Login(c *gin.Context) {
 }
 
 func GetPosts(c *gin.Context) {
+	user,_ := c.Get("user")
+	fmt.Println("posts ",user)
 	c.JSON(http.StatusOK, gin.H{ "message":"From GetPosts"})
 }
 
