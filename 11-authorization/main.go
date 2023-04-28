@@ -92,7 +92,7 @@ func Login(c *gin.Context) {
 func GetPosts(c *gin.Context) {
 	user,_ := c.Get("user")
 	fmt.Println("posts ",user)
-	c.JSON(http.StatusOK, gin.H{ "message":"From GetPosts"})
+	c.JSON(http.StatusOK, gin.H{ "message":"From GetPosts", "data":user})
 }
 
 
