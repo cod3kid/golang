@@ -14,7 +14,6 @@ func printSomething(s string, wg *sync.WaitGroup){
 func main(){
 	var wg sync.WaitGroup
 
-	wg.Add(9)
 	words := []string{
 		"alpha",
 		"beta",
@@ -26,6 +25,9 @@ func main(){
 		"eta",
 		"theta",
 	}	
+
+	wg.Add(len(words))
+
 
 	for i,x := range words{
 		go printSomething(fmt.Sprintf("%d %s",i,x),&wg)
