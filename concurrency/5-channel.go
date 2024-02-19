@@ -5,7 +5,7 @@ func sendValues(myIntChannel chan int){
   for i:=0; i<5; i++ {
     myIntChannel <- i //sending data through a channel 
   }
-
+  close(myIntChannel)
 }
 
 func main() {
