@@ -13,7 +13,7 @@ func main() {
 
   go sendValues(myIntChannel)
 
-  for i:=0; i<5; i++ {
+  for i:=0; i<6; i++ {
     fmt.Println(<-myIntChannel) //receiving data through a channel
   }
 }
