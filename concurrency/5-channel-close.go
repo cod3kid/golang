@@ -3,10 +3,8 @@ import "fmt"
 func sendValues(myIntChannel chan int){
 
   for i:=0; i<5; i++ {
-    myIntChannel <- i //sending data through a channel 
+    myIntChannel <- i //sending value 
   }
-  
-  // Close the channel after sending to prevent deadlock
   close(myIntChannel)
 }
 
@@ -16,6 +14,11 @@ func main() {
   go sendValues(myIntChannel)
 
   for i:=0; i<6; i++ {
-    fmt.Println(<-myIntChannel) //receiving data through a channel
+	// Because of the below statement, channel won't return 0
+    value, open := <-myIntChannel
+    if !open {
+       break;
+    }
+    fmt.Println(value) //receiving value
   }
 }
