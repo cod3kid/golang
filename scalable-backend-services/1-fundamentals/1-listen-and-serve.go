@@ -10,6 +10,7 @@ import (
 var port = os.Getenv("PORT")
 
 func handle(w http.ResponseWriter, r *http.Request) {
+	log.Println("Request path:", r.URL.Path)
 	io.WriteString(w, "Hello students!\n")
 }
 
