@@ -1,17 +1,24 @@
 package main
 
 import (
+	"io"
 	"log"
 	"net/http"
-	"io"
+	"os"
 )
 
-func handle(w http.ResponseWriter, r * http.Request){
-	io.WriteString(w, "Hello World!\n")
+var port = os.Getenv("PORT")
+
+func handle(w http.ResponseWriter, r *http.Request) {
+	io.WriteString(w, "Hello students!\n")
 }
 
 func main() {
-	http.HandleFunc("/",handle)
-	log.Println("Hello")
-	log.Fatal(http.ListenAndServe(":8000",nil))
+	if len(port) == 0 {
+		port = "8080"
+	}
+
+	http.HandleFunc("/", handle)
+	log.Printf("Starting server on localhost:%s\n", port)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
