@@ -7,6 +7,11 @@ import (
 func main() {
 	var m map[string]int
 	fmt.Println(m["Hello"])
+
+
+	// Use the comma (,ok) paradigm to know if a key exist in a map
+	_,ok:= m["Mello"]
+	fmt.Println(ok)
 }
 
 
