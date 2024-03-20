@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"unicode/utf8"
 )
 
 func main() {
@@ -9,4 +10,7 @@ func main() {
 	// the rune “ó” is taking two bytes
 	city := "Kraków"
 	fmt.Println(len(city))
+
+	// To know the number of runes in a string
+	fmt.Println(utf8.RuneCountInString(city))
 }
