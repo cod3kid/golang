@@ -9,3 +9,5 @@ func main() {
 	s := `a\tb`
 	fmt.Println(s)
 }
+
+// s: = "a/tb"
