@@ -12,5 +12,5 @@ func main() {
 
 
 /*
-stirng of 169 is a rune of copyright symbol
+Go will consider 169 as a rune, that's why it return copyright symbol
 */
