@@ -40,7 +40,7 @@ func main() {
 				fmt.Println(err)
 			case msg := <-consumer.Messages():
 				msgCnt++
-				fmt.Printf("Received order Count %d: | Topic(%s) | Message(%s) \n", msgCnt, string(msg.Topic), string(msg.Value))
+				fmt.Printf("Received order Count %d: | Topic(%s) | Key(%s) | Message(%s) \n", msgCnt, string(msg.Topic),string(msg.Key), string(msg.Value))
 				order := string(msg.Value)
 				fmt.Printf("Brewing coffee for order: %s\n", order)
 			case <-sigchan:

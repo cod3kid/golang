@@ -85,6 +85,7 @@ func ConnectProducer(brokers []string) (sarama.SyncProducer, error) {
 func PushOrderToQueue(topic string, message []byte) error {
 	// Create a message
 	msg := &sarama.ProducerMessage{
+		Key: sarama.StringEncoder("order_id_1232"),
 		Topic: topic,
 		Value: sarama.StringEncoder(message),
 	}
