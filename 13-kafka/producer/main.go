@@ -2,9 +2,10 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/IBM/sarama"
 	"log"
 	"net/http"
+
+	"github.com/IBM/sarama"
 )
 
 type Order struct {
