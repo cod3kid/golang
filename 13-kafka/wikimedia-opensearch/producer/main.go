@@ -19,6 +19,7 @@ func ConnectProducer(brokers []string) (sarama.SyncProducer, error) {
 	config.Producer.RequiredAcks = sarama.WaitForAll
 	config.Producer.Retry.Max = 5
 	config.Producer.Idempotent=true
+	config.Net.MaxOpenRequests=1
 
 	// High Throughput Options
 	config.Producer.Compression= sarama.CompressionSnappy
