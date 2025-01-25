@@ -9,6 +9,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"github.com/IBM/sarama"
 	"github.com/google/uuid"
@@ -19,7 +20,8 @@ import (
 func ConnectConsumer(brokers []string) (sarama.Consumer, error) {
 	config := sarama.NewConfig()
 	config.Consumer.Return.Errors = true
-
+	config.Consumer.Offsets.AutoCommit.Enable=true
+	config.Consumer.Offsets.AutoCommit.Interval = 5 * time.Second
 	return sarama.NewConsumer(brokers, config)
 }
 
