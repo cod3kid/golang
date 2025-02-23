@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="sendBtn">Send Request</button>
+    <button id="cancelBtn">Cancel Request</button>
+
+    <script>
+      const sendBtn = document.getElementById("sendBtn");
+      const cancelBtn = document.getElementById("cancelBtn");
+
+      const controller = new AbortController();
+
+      sendBtn.addEventListener("click", () => {
+        fetch("http://localhost:3000/cancellable", {
+          method: "GET",
+          signal: controller.signal,
+        });
+      });
+
+      cancelBtn.addEventListener("click", () => {
+        controller.abort();
+      });
+    </script>
+  </body>
+</html>
