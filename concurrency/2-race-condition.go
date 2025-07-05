@@ -1,4 +1,5 @@
 package main
+
 import "fmt"
 
 func deposit(balance *int,amount int){
